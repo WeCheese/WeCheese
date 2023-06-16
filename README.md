@@ -8,7 +8,7 @@
 
 # Model and Engine
 
-![Engine_Architecture](.\Engine_Architecture.jpg)
+![Engine_Architecture](/Engine_Architecture.jpg)
 
 The project is mainly composed of the following three parts:
 
