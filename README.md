@@ -1,10 +1,28 @@
 # Getting Started
 
+## List of Third-party Libraries
+
+* [Flask API](https://flask.palletsprojects.com/en/2.3.x/)
+* [Unity AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html)
+* [OpenCV](https://opencv.org/)
+
 # Model and Engine
+
+![Engine_Architecture](.\Engine_Architecture.jpg)
+
+The project is mainly composed of the following three parts:
+
+- **User End:** The user end is implemented with Unity. It is responsible for rendering AR settings and sending user requests (find opponents, move chess, retrieve previous games) to the server engine. It relies on the Unity AR Foundation library to render AR components and depends on OpenCV to process user gesture so as to determine user move.
+- **Server Engine:** The server engine, implemented with Flask API, is responsible for processing user requests. It contains the following three handlers, you can refer to the [API and Controllers](#APIs and Controller) part for implementation details:
+  * Match Request Handler: Processes user request for matching an opponent.
+  * Game Sync Handler: Receives user moves and forwards the game progress to the opponent.
+  * Progress Retrieval Handler: Processes user request for resuming unfinished game or saving game progress. It retrieves data from the database and sends to the user end.
+- **Database**: The database, implemented in mySQL, stores user information and game progress.
 
 # APIs and Controller
 ## Sign up
 **Request Parameters**
+
 | Key        | Location | Type   | Description      |
 | ---------- | -------- | ------ | ---------------- |
 | `username` | Session Cookie| String | New User |
@@ -33,6 +51,7 @@ curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/signup/'
 
 ## Login
 **Request Parameters**
+
 | Key        | Location | Type   | Description      |
 | ---------- | -------- | ------ | ---------------- |
 | `username` | Session Cookie| String | Current User |
@@ -182,7 +201,8 @@ curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/j
 *If the game ends, return an indicator*
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
-| `end` | JSON | Boolean | Game ended | 
+| `end` | JSON | Boolean | Game ended |
+
 **Example**
 ~~~ 
 curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d 
@@ -196,6 +216,7 @@ curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d
 {
     "end": True
 }
+
 ~~~
 
 ## Withdraw a move
@@ -215,8 +236,9 @@ curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | confirmed | JSON | Boolean | If the opponent agrees the move |
+
 **Example**
-~~~ 
+~~~
 curl -x POST https://SERVER_IP/withdraw/' -H 'Content-Type: application/json' -d 
 '{
     "game_id": "gameid:0",
@@ -241,8 +263,9 @@ None
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | confirmed | JSON | Boolean | If the opponent agrees the move |
+
 **Example**
-~~~ 
+~~~
 curl -x GET https://USER_IP/withdraw_confirm/'
 
 {
@@ -266,8 +289,9 @@ curl -x GET https://USER_IP/withdraw_confirm/'
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | `saved_game_id` | JSON | String | the saved game |
+
 **Example**
-~~~ 
+~~~
 curl -x POST https://SERVER_IP/save/' -H 'Content-Type: application/json' -d 
 '{
     "game_id": "gameid:0",
@@ -295,8 +319,9 @@ curl -x POST https://SERVER_IP/save/' -H 'Content-Type: application/json' -d
 | --- | -------- | ---- | ----------- |
 | `game_id` | JSON | String | Current game |
 | `game_progress` | JSON | Dictionary | The position of each chess piece |
+
 **Example**
-~~~ 
+~~~
 curl -x POST https://SERVER_IP/resume/' -H 'Content-Type: application/json' -d 
 '{
     "svaed_game_id": "sgameid:0",
@@ -335,8 +360,9 @@ curl -x POST https://SERVER_IP/resume/' -H 'Content-Type: application/json' -d
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | `no_selection` | JSON | Boolean | No chess is selected |
+
 **Example**
-~~~ 
+~~~
 curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d 
 '{
     "image": ImageObject,
@@ -346,6 +372,7 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
     "x_pos": 2,
     "y_pos": 3
 }
+
 ~~~
 
 
@@ -355,3 +382,9 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
 # View UI/UX
 
 # Team Roster
+* Dier HOU:
+* Jingye LIN:
+* Zhemin QU:
+* Shuhui YANG:
+* Yicheng ZHANG:
+* Yuxuan ZHU:
