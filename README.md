@@ -8,6 +8,12 @@
 
 # Model and Engine
 
+## Story Map
+
+![Engine_Architecture](/Storymap.png)
+
+## Block Diagram
+
 ![Engine_Architecture](/Engine_Architecture.jpg)
 
 The project is mainly composed of the following three parts:
