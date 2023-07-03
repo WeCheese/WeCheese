@@ -37,17 +37,12 @@ The project is mainly composed of the following three parts:
 **Response Codes**
 | Code              | Description            |
 | ----------------- | ---------------------- |
-| `200 OK`     | Success                |
+| `201 Created` | Created         |
 | `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-
-*If the user alreadt exists*
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `exist` | JSON | Boolean | The username is used |
+| `409 Conflict` | Account already exists |
 
 **Example**
+
 ~~~ 
 curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/signup/'
 
@@ -64,28 +59,90 @@ curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/signup/'
 | `password` | Session Cookie| String | Current User
 
 **Response Codes**
+
 | Code              | Description            |
 | ----------------- | ---------------------- |
 | `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-
-*If the user does not exist*
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `nonexist` | JSON | Boolean | Backend does not have a record of the user |
+| `401 Unauthorized` | Invalid passcode |
+| `403 Forbidden` | Account not exist |
 
 **Example**
+
 ~~~ 
 curl -b cookies.txt -c cookies.txt -X GET https://OUR_SERVER/available_users/'
 
+{}
+~~~
+
+## Invite Friend
+
+**Request Parameters**
+
+| Key        | Location       | Type   | Description |
+| ---------- | -------------- | ------ | ----------- |
+| `username` | Session Cookie | String | User        |
+
+**Response Codes**
+
+| Code              | Description        |
+| ----------------- | ------------------ |
+| `200 OK`          | Success            |
+| `400 Bad Request` | Invalid parameters |
+
+**Returns**
+
+| Key      | Location | Type   | Description               |
+| -------- | -------- | ------ | ------------------------- |
+| `gameid` | JSON     | String | Generated game_id         |
+| `code`   | JSON     | Number | Generated invitation code |
+
+**Example**
+
+~~~ 
+curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/invite/'
+
 {
-    "nonexist": True
+    "game_id": "twedit",
+    "code": 2034
 }
 ~~~
 
-## Get availablity list
+## Join Game
+
+**Required Parameters** 
+
+| Key        | Location       | Type   | Description     |
+| ---------- | -------------- | ------ | --------------- |
+| `username` | Session Cookie | String | User ID         |
+| `code`     | JSON           | Number | Invitation Code |
+
+**Response Codes**
+
+| Code              | Description        |
+| ----------------- | ------------------ |
+| `200 OK`          | Success            |
+| `400 Bad Request` | Invalid parameters |
+
+**Returns**
+
+| Key       | Location | Type   | Description |
+| --------- | -------- | ------ | ----------- |
+| `game_id` | JSON     | String | Game ID     |
+
+**Example**
+
+```
+curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/join/'
+
+{
+    "game_id": "twedit"
+}
+```
+
+
+
+## Get availability list (MVP)
+
 **Request Parameters**
 
 None
@@ -116,7 +173,7 @@ curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/signup/'
 }
 ~~~
 
-## Find Opponents
+## Find Opponents(MVP)
 **Request Parameters**
 
 | Key | Location | Type | Description |
@@ -151,7 +208,7 @@ curl -x POST https://OUR_SERVER/find_opponents/' -H 'Content-Type: application/j
 }
 ~~~
 
-## Request opponent's confirmation
+## Request opponent's confirmation MVP)
 **Request Parameters**
 
 | Key | Location | Type | Description |
@@ -180,11 +237,15 @@ curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/j
 }
 ~~~
 
+
+
 ## Move a chess
+
 **Request Parameters**
 
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
+| `username` | Session Cookie | String | User ID |
 | `game_id` | JSON | String | Current game |
 | `chess_id` | JSON | String | Selected chess |
 | `des_x` | JSON | Int | Destination of the selected chess: x position |
@@ -204,25 +265,17 @@ curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/j
 | `des_x` | JSON | Int | Destination of the selected chess: x position |
 | `des_y` | JSON | Int | Destination of the selected chess: y position |
 
-*If the game ends, return an indicator*
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `end` | JSON | Boolean | Game ended |
-
 **Example**
+
 ~~~ 
-curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d 
-'{
+curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d
+
+{
     "game_id": "gameid:0",
     "chess_id": "chessid:12",
     "des_x": 5,
     "des_y": 7
-}'
-
-{
-    "end": True
 }
-
 ~~~
 
 ## Withdraw a move
@@ -236,23 +289,12 @@ curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d
 | Code              | Description            |
 | ----------------- | ---------------------- |
 | `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| confirmed | JSON | Boolean | If the opponent agrees the move |
+| `404 Not Found` | Unsuccessful |
 
 **Example**
 ~~~
 curl -x POST https://SERVER_IP/withdraw/' -H 'Content-Type: application/json' -d 
-'{
-    "game_id": "gameid:0",
-}'
-
-{
-    "confirmed": True
-}
+{}
 ~~~
 
 ## Confirm withdraw
@@ -260,6 +302,7 @@ curl -x POST https://SERVER_IP/withdraw/' -H 'Content-Type: application/json' -d
 None
 
 **Response Codes**
+
 | Code              | Description            |
 | ----------------- | ---------------------- |
 | `200 OK`     | Success                |
@@ -271,6 +314,7 @@ None
 | confirmed | JSON | Boolean | If the opponent agrees the move |
 
 **Example**
+
 ~~~
 curl -x GET https://USER_IP/withdraw_confirm/'
 
@@ -292,6 +336,7 @@ curl -x GET https://USER_IP/withdraw_confirm/'
 | `400 Bad Request` | Invalid parameters     |
 
 **Returns**
+
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | `saved_game_id` | JSON | String | the saved game |
@@ -308,13 +353,15 @@ curl -x POST https://SERVER_IP/save/' -H 'Content-Type: application/json' -d
 }
 ~~~
 
-## Resume game
+## Get Saved Game List
 **Request Parameters**
+
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
-| `saved_game_id` | JSON | String | a saved game |
+| `username` | Session Cookie | String | User name |
 
 **Response Codes**
+
 | Code              | Description            |
 | ----------------- | ---------------------- |
 | `200 OK`     | Success                |
@@ -323,27 +370,69 @@ curl -x POST https://SERVER_IP/save/' -H 'Content-Type: application/json' -d
 **Returns**
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
-| `game_id` | JSON | String | Current game |
-| `game_progress` | JSON | Dictionary | The position of each chess piece |
+| `saved_games` | JSON | List | Saved games |
 
 **Example**
-~~~
-curl -x POST https://SERVER_IP/resume/' -H 'Content-Type: application/json' -d 
-'{
-    "svaed_game_id": "sgameid:0",
-}'
 
+~~~json
+curl -x GET https://SERVER_IP/saved_games/' -H 'Content-Type: application/json' -d 
+{}
+
+[
+    {
+        game_id: "twedit",
+        user1: "user_id1",
+        user2: "user_id2",
+        start_time: "2023-06-07"
+    },
+    {
+        ...
+    }
+]
+~~~
+
+## Get Game Progress
+
+**Request Parameters**
+
+| Key      | Location | Type   | Description |
+| -------- | -------- | ------ | ----------- |
+| `gameid` | JSON     | String | Game ID     |
+
+**Response Codes**
+
+| Code            | Description  |
+| --------------- | ------------ |
+| `200 OK`        | Success      |
+| `404 Not Found` | Unsuccessful |
+
+**Returns**
+
+| Key             | Location | Type       | Description                      |
+| --------------- | -------- | ---------- | -------------------------------- |
+| `game_progress` | JSON     | Dictionary | Saved progress of requested game |
+
+```
+curl -x GET https://SERVER_IP/restore_game/' -H 'Content-Type: application/json' -d 
+```
+
+``` json
 {
-    "game_id": "gameid:0"
-    "game_progress": {
-        "chessid:0": {"x": 0, "y": 0},
-        "chessid:1": {"x": 0, "y": 1},
+	user1: {
+        horse1: [0,1],
+        car1: [0,1],
+        ...
+    },
+    user2: {
         ...
     }
 }
-~~~
+```
+
+
 
 ## Recognize gesture (TBD)
+
 **Request Parameters**
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
