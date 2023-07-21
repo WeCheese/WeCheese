@@ -1,4 +1,3 @@
-![image](https://github.com/yxx200/WeCheese/assets/62293011/04aecb69-6f0b-4cf8-8925-bd3c0e3df690)# Getting Started
 
 ## List of Third-party Libraries
 
