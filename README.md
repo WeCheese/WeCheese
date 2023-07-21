@@ -480,17 +480,17 @@ Tool: Figma
 ## User Test Video
 Link:  https://sjtu.feishu.cn/file/InWAb4pVToxTsMxrGDlcjAupn8c
 ## Summary of Findings
-Generally the UI is straightforward and easy to use.
+**1** Generally the UI is straightforward and easy to use.
 
-Opponent move is not easy to tell.
+**2** Opponent move is not easy to tell.
 
-Board selection interface is confusing, more prompts needed.
+**3** Board selection interface is confusing, more prompts needed.
 
-Board style and chess piece style selection should be separated.
+**4** Board style and chess piece style selection should be separated.
 
-Proper prompts should be given when game ends.
+**5** Proper prompts should be given when game ends.
 
-User feels confused about having to invite a friend again when resuming a game.
+**6** User feels confused about having to invite a friend again when resuming a game.
 ## Numerical Results
 | Task | Evaluation Metrics | VChess (% success) |
 | --- | --------  | ----------- |
@@ -504,13 +504,12 @@ User feels confused about having to invite a friend again when resuming a game.
 | End game | <= 2 clicks |  100% |
 
 ## Final Design Justification
-### Provide reminding for opponent move: 
-Change the prompt to ‘Opponent move finished!’
-### Provide prompts for board selection interface: 
+**Provide reminding for opponent move:** Change the prompt to ‘Opponent move finished!’
+**Provide prompts for board selection interface:** 
 Showing the difference between two boards
-### Provide prompts when game ends: 
+**Provide prompts when game ends:**
 A new page is added to the game process when someone wins, and there will be another new page for a lost
-### Add login and signup page:
+**Add login and signup page:**
 Pages used for login and signup are added in order to transfer user data with backend
 
 # Team Roster
