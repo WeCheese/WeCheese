@@ -475,6 +475,7 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
 
 # View UI/UX
 ## UI/UX Flow Overview
+![UI Overview](/UI_Overview.png)
 Link: https://www.figma.com/file/FKQCSTApjnvaRr3wrYhBJK/VR-Chess?type=design&node-id=0-1&mode=design&t=VmpujJMC36vtkzEg-0
 Tool: Figma
 ## User Test Video
