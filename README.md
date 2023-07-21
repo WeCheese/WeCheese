@@ -1,4 +1,3 @@
-# Getting Started
 
 ## List of Third-party Libraries
 
@@ -475,10 +474,50 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
 ## Third-Party SDKs
 
 # View UI/UX
+## UI/UX Flow Overview
+Link: https://www.figma.com/file/FKQCSTApjnvaRr3wrYhBJK/VR-Chess?type=design&node-id=0-1&mode=design&t=VmpujJMC36vtkzEg-0
+Tool: Figma
+## User Test Video
+Link:  https://sjtu.feishu.cn/file/InWAb4pVToxTsMxrGDlcjAupn8c
+## Summary of Findings
+**1.** Generally the UI is straightforward and easy to use.
+
+**2.** Opponent move is not easy to tell.
+
+**3.** Board selection interface is confusing, more prompts needed.
+
+**4.** Board style and chess piece style selection should be separated.
+
+**5.** Proper prompts should be given when game ends.
+
+**6.** User feels confused about having to invite a friend again when resuming a game.
+## Numerical Results
+| Task | Evaluation Metrics | VChess (% success) |
+| --- | --------  | ----------- |
+| Initiate game by inviting friend. | <= 2 clicks | 83% |
+| Change board style | <= 2 clicks |  50% |
+| Make a move | <= 2 clicks |  100% |
+| Watch opponent’s move | <= 1 clicks, Identify move | 34% |
+| Save the game | <= 2 clicks |  100% |
+| Review game | <= 2 clicks |  83% |
+| Resume game | <= 2 clicks |  100% |
+| End game | <= 2 clicks |  100% |
+
+## Final Design Justification
+**Provide reminding for opponent move:** Change the prompt to ‘Opponent move finished!’
+
+**Provide prompts for board selection interface:** 
+Showing the difference between two boards
+
+**Provide prompts when game ends:**
+A new page is added to the game process when someone wins, and there will be another new page for a lost
+
+**Add login and signup page:**
+Pages used for login and signup are added in order to transfer user data with backend
 
 # Team Roster
 * Dier HOU: User Signup, User Login, Select Opponents, Make a Move, View Opponents' Move. Designed and constructed the backend database, implemented Firebase Manager to communicate with frontend.
-* Jingye LIN: User Signup, User Login, Select Opponents. Designed and implemented the User Interface.
+* Jingye LIN: User Signup, User Login, Select Opponents. Designed and implemented the User Interface, transformed message between User Interface and backend.
 * Zhemin QU: Make a Move, View Opponents' Move. Designed and Implemented the Abstract Chess Structure, transformed message between AR Chessboard and backend.
 * Shuhui YANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, code review, debugging and testing.
 * Yicheng ZHANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, fix Android related problems.
