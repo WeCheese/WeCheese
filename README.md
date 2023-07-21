@@ -477,9 +477,9 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
 # View UI/UX
 
 # Team Roster
-* Dier HOU: Designed and constructed the backend database, implemented Firebase Manager to communicate with frontend.
-* Jingye LIN: Designed and implemented the User Interface.
-* Zhemin QU: Designed and Implemented the Abstract Chess Structure, transformed message between AR Chessboard and backend.
-* Shuhui YANG: AR Chess Render, code review, debugging and testing.
-* Yicheng ZHANG: AR Chess Render, fix Android related problems.
-* Yuxuan ZHU: Designed and implemented gesture recognition algorithm with both python and CSharp.
+* Dier HOU: User Signup, User Login, Select Opponents, Make a Move, View Opponents' Move. Designed and constructed the backend database, implemented Firebase Manager to communicate with frontend.
+* Jingye LIN: User Signup, User Login, Select Opponents. Designed and implemented the User Interface.
+* Zhemin QU: Make a Move, View Opponents' Move. Designed and Implemented the Abstract Chess Structure, transformed message between AR Chessboard and backend.
+* Shuhui YANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, code review, debugging and testing.
+* Yicheng ZHANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, fix Android related problems.
+* Yuxuan ZHU: Make a Move. Designed and implemented gesture recognition algorithm with both python and CSharp.
