@@ -1,0 +1,19 @@
+# Unity related
+*.sln
+*.csproj
+**/[Ll]ibrary/
+**/[Ll]ogs/
+**/[Tt]emp/
+**/[Uu]ser[Ss]ettings/
+**/[Aa]ssets/**/*.meta
+
+# python related
+**/__pycache__/
+
+# vscode
+**/.vscode/
+
+
+# macos
+**/.DS_Store
+
