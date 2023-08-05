@@ -22,7 +22,9 @@ Yicheng Zhang works on the AR components of the project.
 
 ## Shuhui Yang
 
-Yicheng Zhang works on the AR components of the project.
+Shuhui Yang works on the AR components of the project. More specifically, she was involved in transplanting the gesture recognition model into AR chess movement. A major challenge was the incompatibility between the WebCamera used for gesture recognition and the AR Camera used for the AR component. This issue was resolved by acquiring and manipulating textures obtained from AR Foundation on the CPU, thus eliminating the need for the WebCamera. Additionally, she handled the problem triggered by transformation between the viewport and the local coordinate systems, which was involved in the interaction between gesture recognition and AR chess pieces.
+
+Meanwhile, Shuhui Yang works on the UI design of AR chessboard and chess pieces. 
 
 ## Jingye Lin
 
