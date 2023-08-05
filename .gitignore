@@ -6,6 +6,7 @@
 **/[Tt]emp/
 **/[Uu]ser[Ss]ettings/
 **/[Aa]ssets/**/*.meta
+**/[Ff]irebase/
 
 # python related
 **/__pycache__/
