@@ -2,9 +2,31 @@
 
 ## Dier Hou
 
-I am responsible for setting up the connection between the front-end app and the back-end firebase database. First, I am responsible for setting up the user signup and login mechanism using Firebase Authentication. Second, I implemented the storage of each user's each game and every move in the Firebase Database. Finally, I realized the real-time synchronization of the two users' move in one game.
+Dier Hou is responsible for setting up the connection between the front-end app and the back-end firebase database. First, I am responsible for setting up the user signup and login mechanism using Firebase Authentication. Second, I implemented the storage of each user's each game and every move in the Firebase Database. Finally, I realized the real-time synchronization of the two users' move in one game.
 
 The biggest challenge I encountered was to realize the synchronization of two users' moves. I first decided to use HTTP requests to retrieve the latest user move, but it turns out it's very inefficient. After some in-depth research, I found out the Firebase Database which provides real-time data update callback mechanism that allows to realize real-time synchronization.
+
+## Yuxuan Zhu
+
+Yuxuan Zhu works on the machine learning part of this project, specifically, the hand gesture detection part. He deployed the hand landmark model and palm detection model from Mediapipe by Google. To integrate the models to unity engine, he transferred the tflite package to unity platform and implemented the model inference algorithm using C#. Alternatively, he designed a python version of the algorithm as a backup solution on the backend.
+
+## Zhemin Qu
+
+Zhemin Qu works on the abstract chess and chessboard structure at the front-end. More specifically, he applies the concept of interface in Object-Oriented-Programming to implement various different chesses, including pawns, bishops, cannons, etc., and various data structures to design and implement the abstract chessboard. He works on the movement validation, movement recording, and basic rules of the game.
+
+Meanwhile, Zhemin works as the intermediate to communicate between the backend (Firebase Manager) and the frontend renderer. As the information stored in the back-end is significantly different from the information required in the AR renderer, and the data stored in the backend should be consistent, while the view of each player is different, one great challenge is to transform the data correctly and effectively. As the detailed need of the AR renderer for the data had not been determined when the structure was designed, a large number of different encapsulated functions were designed and implemented. He did great effort to imagine the whole image of the final project and design the APIs in advance.
+
+## Yicheng Zhang
+
+Yicheng Zhang works on the AR components of the project.
+
+## Shuhui Yang
+
+Yicheng Zhang works on the AR components of the project.
+
+## Jingye Lin
+
+Jingye Lin works on the UI Design of the project.
 
 # Getting Started
 
@@ -14,6 +36,10 @@ The biggest challenge I encountered was to realize the synchronization of two us
 * [Unity AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html)
 * [OpenCV](https://opencv.org/)
 * [Firebase Unity SDK](https://firebase.google.com/docs/unity/setup)
+
+Please download the above libraries to the VChess/Assets folder.
+
+The app can be built on folder VChess with Unity Hub
 
 # Model and Engine
 
@@ -282,7 +308,7 @@ Link:  https://sjtu.feishu.cn/file/InWAb4pVToxTsMxrGDlcjAupn8c
 | Initiate game by inviting friend. | <= 2 clicks | 83% |
 | Change board style | <= 2 clicks |  50% |
 | Make a move | <= 2 clicks |  100% |
-| Watch opponent’s move | <= 1 clicks, Identify move | 34% |
+| Watch opponent's move | <= 1 clicks, Identify move | 34% |
 | Save the game | <= 2 clicks |  100% |
 | Review game | <= 2 clicks |  83% |
 | Resume game | <= 2 clicks |  100% |
