@@ -1,0 +1,226 @@
+{
+  "project_info": {
+    "project_number": "528502022511",
+    "project_id": "vchess-ece441",
+    "storage_bucket": "vchess-ece441.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:6b4c37d2d997e5dd52889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.ECE441.WeCheese"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:38dad64ed7b88c9d52889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.VChess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:7967e8f1f97087d552889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.VChess.Zero"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:26cddfea825d9c8252889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.VChessAR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:258940d4ee7eebf052889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.WeCheese.Newstart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528502022511:android:c5e5e9f4f0118b1c52889a",
+        "android_client_info": {
+          "package_name": "com.sjtu.WeCheese.VChessAR"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "528502022511-jn2p80398fl23chbu51lti4h074996h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_nTV6Z777LrSz8nVibu-IyzOmg3_fuIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "528502022511-ieki545oifjp6eknodmqfcpq2io4b0km.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "528502022511-v4n488s7e20eubdbte64o5v03crkg764.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sjtu.ece441.WeCheese"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
