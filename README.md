@@ -1,9 +1,19 @@
+# Team Roster
+
+## Dier Hou
+
+I am responsible for setting up the connection between the front-end app and the back-end firebase database. First, I am responsible for setting up the user signup and login mechanism using Firebase Authentication. Second, I implemented the storage of each user's each game and every move in the Firebase Database. Finally, I realized the real-time synchronization of the two users' move in one game.
+
+The biggest challenge I encountered was to realize the synchronization of two users' moves. I first decided to use HTTP requests to retrieve the latest user move, but it turns out it's very inefficient. After some in-depth research, I found out the Firebase Database which provides real-time data update callback mechanism that allows to realize real-time synchronization.
+
+# Getting Started
 
 ## List of Third-party Libraries
 
 * [Flask API](https://flask.palletsprojects.com/en/2.3.x/)
 * [Unity AR Foundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.0/manual/index.html)
 * [OpenCV](https://opencv.org/)
+* [Firebase Unity SDK](https://firebase.google.com/docs/unity/setup)
 
 # Model and Engine
 
@@ -22,7 +32,7 @@ The project is mainly composed of the following three parts:
   * Match Request Handler: Processes user request for matching an opponent.
   * Game Sync Handler: Receives user moves and forwards the game progress to the opponent.
   * Progress Retrieval Handler: Processes user request for resuming unfinished game or saving game progress. It retrieves data from the database and sends to the user end.
-- **Database**: The database, implemented in mySQL, stores user information and game progress.
+- **Database**: The database, implemented in Firebase, stores user information and game progress.
 
 # APIs and Controller
 ## Sign up
@@ -138,106 +148,6 @@ curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/join/'
 }
 ```
 
-
-
-## Get availability list (MVP)
-
-**Request Parameters**
-
-None
-
-**Response Codes**
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-
-*If the user alreadt exists*
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `available_users` | JSON | Boolean | A list of user IDs of available users |
-
-**Example**
-~~~ 
-curl -b cookies.txt -c cookies.txt -X POST https://OUR_SERVER/signup/'
-
-{
-    "available_users": [
-        "userid:0",
-        "userid:1",
-        ...
-    ]
-}
-~~~
-
-## Find Opponents(MVP)
-**Request Parameters**
-
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `user_id` | JSON | String | current user |
-| `opponent_id` | JSON | String | the user ID of selected opponent |
-
-**Response Codes**
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-
-*If the opponent confirms to start a game*
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `game_id` | JSON | Int | Assigned current game id |
-
-*If the opponent refuses to start a game*
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `confirmed` | JSON | Boolean | If the opponent aggrees to start the game |
-
-**Example**
-~~~ 
-curl -x POST https://OUR_SERVER/find_opponents/' -H 'Content-Type: application/json' -d '{"user_id": "userid:0", "opponent_id": "userid:1"}'
-
-{
-    "confirmed": False
-}
-~~~
-
-## Request opponent's confirmation MVP)
-**Request Parameters**
-
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `opponent_id` | JSON | String | the user who wants to be the opponent |
-| `game_id` | JSON | Int | the assigned game id if the user aggres to start the game |
-
-**Response Codes**
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-
-| Key        | Location       | Type   | Description  |
-| ---------- | -------------- | ------ | ------------ |
-| `confirmed` | JSON | Boolean | If the user agrees the request to start a game |
-
-**Example**
-~~~ 
-curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/json' -d '{"opponent_id": "userid:0"}'
-
-{
-    "confirmed": False
-}
-~~~
-
-
-
 ## Move a chess
 
 **Request Parameters**
@@ -247,10 +157,11 @@ curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/j
 | `username` | Session Cookie | String | User ID |
 | `game_id` | JSON | String | Current game |
 | `chess_id` | JSON | String | Selected chess |
-| `des_x` | JSON | Int | Destination of the selected chess: x position |
-| `des_y` | JSON | Int | Destination of the selected chess: y position |
+| `from` | JSON | Int | Original position of the selected chess |
+| `to` | JSON | Int | Destination of the selected chess |
 
 **Response Codes**
+
 | Code              | Description            |
 | ----------------- | ---------------------- |
 | `200 OK`     | Success                |
@@ -261,7 +172,7 @@ curl -x POST https://USER_IP/confirm_opponents/' -H 'Content-Type: application/j
 | Key | Location | Type | Description |
 | --- | -------- | ---- | ----------- |
 | `chess_id` | JSON | String | Selected chess |
-| `des_x` | JSON | Int | Destination of the selected chess: x position |
+| JSON | Int | Destination of the selected chess: x position |
 | `des_y` | JSON | Int | Destination of the selected chess: y position |
 
 **Example**
@@ -274,51 +185,6 @@ curl -x POST https://SERVER_IP/move/' -H 'Content-Type: application/json' -d
     "chess_id": "chessid:12",
     "des_x": 5,
     "des_y": 7
-}
-~~~
-
-## Withdraw a move
-**Request Parameters**
-
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `game_id` | JSON | String | Current game |
-
-**Response Codes**
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `404 Not Found` | Unsuccessful |
-
-**Example**
-~~~
-curl -x POST https://SERVER_IP/withdraw/' -H 'Content-Type: application/json' -d 
-{}
-~~~
-
-## Confirm withdraw
-**Request Parameters**
-None
-
-**Response Codes**
-
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| confirmed | JSON | Boolean | If the opponent agrees the move |
-
-**Example**
-
-~~~
-curl -x GET https://USER_IP/withdraw_confirm/'
-
-{
-    "confirmed": True
 }
 ~~~
 
@@ -351,84 +217,6 @@ curl -x POST https://SERVER_IP/save/' -H 'Content-Type: application/json' -d
     "saved_game_id": "sgameid:0"
 }
 ~~~
-
-## Get Saved Game List
-**Request Parameters**
-
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `username` | Session Cookie | String | User name |
-
-**Response Codes**
-
-| Code              | Description            |
-| ----------------- | ---------------------- |
-| `200 OK`     | Success                |
-| `400 Bad Request` | Invalid parameters     |
-
-**Returns**
-| Key | Location | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `saved_games` | JSON | List | Saved games |
-
-**Example**
-
-~~~json
-curl -x GET https://SERVER_IP/saved_games/' -H 'Content-Type: application/json' -d 
-{}
-
-[
-    {
-        game_id: "twedit",
-        user1: "user_id1",
-        user2: "user_id2",
-        start_time: "2023-06-07"
-    },
-    {
-        ...
-    }
-]
-~~~
-
-## Get Game Progress
-
-**Request Parameters**
-
-| Key      | Location | Type   | Description |
-| -------- | -------- | ------ | ----------- |
-| `gameid` | JSON     | String | Game ID     |
-
-**Response Codes**
-
-| Code            | Description  |
-| --------------- | ------------ |
-| `200 OK`        | Success      |
-| `404 Not Found` | Unsuccessful |
-
-**Returns**
-
-| Key             | Location | Type       | Description                      |
-| --------------- | -------- | ---------- | -------------------------------- |
-| `game_progress` | JSON     | Dictionary | Saved progress of requested game |
-
-```
-curl -x GET https://SERVER_IP/restore_game/' -H 'Content-Type: application/json' -d 
-```
-
-``` json
-{
-	user1: {
-        horse1: [0,1],
-        car1: [0,1],
-        ...
-    },
-    user2: {
-        ...
-    }
-}
-```
-
-
 
 ## Recognize gesture (TBD)
 
@@ -469,10 +257,6 @@ curl -x POST https://SERVER_IP/gesture/' -H 'Content-Type: application/json' -d
 
 ~~~
 
-
-
-## Third-Party SDKs
-
 # View UI/UX
 ## UI/UX Flow Overview
 ![UI Overview](/UI_Overview.png)
@@ -505,7 +289,7 @@ Link:  https://sjtu.feishu.cn/file/InWAb4pVToxTsMxrGDlcjAupn8c
 | End game | <= 2 clicks |  100% |
 
 ## Final Design Justification
-**Provide reminding for opponent move:** Change the prompt to ‘Opponent move finished!’
+**Provide reminding for opponent move:** Change the prompt to 'Opponent move finished!'
 
 **Provide prompts for board selection interface:** 
 Showing the difference between two boards
@@ -516,10 +300,4 @@ A new page is added to the game process when someone wins, and there will be ano
 **Add login and signup page:**
 Pages used for login and signup are added in order to transfer user data with backend
 
-# Team Roster
-* Dier HOU: User Signup, User Login, Select Opponents, Make a Move, View Opponents' Move. Designed and constructed the backend database, implemented Firebase Manager to communicate with frontend.
-* Jingye LIN: User Signup, User Login, Select Opponents. Designed and implemented the User Interface, transformed message between User Interface and backend.
-* Zhemin QU: Make a Move, View Opponents' Move. Designed and Implemented the Abstract Chess Structure, transformed message between AR Chessboard and backend.
-* Shuhui YANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, code review, debugging and testing.
-* Yicheng ZHANG: Board Generation, Make a Move, View Opponents' Move. AR Chess Render, fix Android related problems.
-* Yuxuan ZHU: Make a Move. Designed and implemented gesture recognition algorithm with both python and CSharp.
+Shown above is the UI/UX flow overview. There are three main streams: starting new game, resuming game and reviewing a previous game. To start a new game, one user will be given a 6-digit number and another user can enter the code to join the game. This is to ensure that the two users can join the same game. After both users have joined the game, they will be directed to the game view and start making moves. To resume a game, both users will resume the latest game they started, the chess board will be updated to the latest status. To review a game, users can press the "next step" button to view the game step by step.
